@@ -1,0 +1,36 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] module.chef_server.null_resource.chefserver" [label = "null_resource.chefserver", shape = "box"]
+		"[root] module.chef_server.provider.null" [label = "provider.null", shape = "diamond"]
+		"[root] module.chef_server.provider.vcd" [label = "provider.vcd", shape = "diamond"]
+		"[root] module.chef_server.vcd_dnat.chefserver-https" [label = "vcd_dnat.chefserver-https", shape = "box"]
+		"[root] module.chef_server.vcd_firewall_rules.chefserver-fw" [label = "vcd_firewall_rules.chefserver-fw", shape = "box"]
+		"[root] module.chef_server.vcd_vapp.chefserver" [label = "vcd_vapp.chefserver", shape = "box"]
+		"[root] null_resource.jumpbox" [label = "null_resource.jumpbox", shape = "box"]
+		"[root] provider.null" [label = "provider.null", shape = "diamond"]
+		"[root] provider.vcd" [label = "provider.vcd", shape = "diamond"]
+		"[root] vcd_dnat.jumpbox-ssh" [label = "vcd_dnat.jumpbox-ssh", shape = "box"]
+		"[root] vcd_firewall_rules.jumpbox-fw" [label = "vcd_firewall_rules.jumpbox-fw", shape = "box"]
+		"[root] vcd_vapp.jumpbox" [label = "vcd_vapp.jumpbox", shape = "box"]
+		"[root] module.chef_server.null_resource.chefserver" -> "[root] module.chef_server.provider.null"
+		"[root] module.chef_server.null_resource.chefserver" -> "[root] module.chef_server.vcd_vapp.chefserver"
+		"[root] module.chef_server.null_resource.chefserver" -> "[root] vcd_dnat.jumpbox-ssh"
+		"[root] module.chef_server.provider.null" -> "[root] provider.null"
+		"[root] module.chef_server.provider.vcd" -> "[root] provider.vcd"
+		"[root] module.chef_server.vcd_dnat.chefserver-https" -> "[root] module.chef_server.provider.vcd"
+		"[root] module.chef_server.vcd_dnat.chefserver-https" -> "[root] module.chef_server.vcd_vapp.chefserver"
+		"[root] module.chef_server.vcd_dnat.chefserver-https" -> "[root] vcd_dnat.jumpbox-ssh"
+		"[root] module.chef_server.vcd_firewall_rules.chefserver-fw" -> "[root] module.chef_server.provider.vcd"
+		"[root] module.chef_server.vcd_firewall_rules.chefserver-fw" -> "[root] vcd_dnat.jumpbox-ssh"
+		"[root] module.chef_server.vcd_vapp.chefserver" -> "[root] module.chef_server.provider.vcd"
+		"[root] null_resource.jumpbox" -> "[root] provider.null"
+		"[root] null_resource.jumpbox" -> "[root] vcd_dnat.jumpbox-ssh"
+		"[root] vcd_dnat.jumpbox-ssh" -> "[root] provider.vcd"
+		"[root] vcd_dnat.jumpbox-ssh" -> "[root] vcd_vapp.jumpbox"
+		"[root] vcd_firewall_rules.jumpbox-fw" -> "[root] provider.vcd"
+		"[root] vcd_vapp.jumpbox" -> "[root] provider.vcd"
+	}
+}
+
